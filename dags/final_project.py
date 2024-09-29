@@ -117,6 +117,7 @@ run_quality_checks = DataQualityOperator(
         {
             "table": "users",
             "column": "userid",
+            "result": 0
         },
     ]
 )
