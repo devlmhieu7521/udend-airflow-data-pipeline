@@ -11,7 +11,7 @@ from operators import (StageToRedshiftOperator, LoadFactOperator,
 from helpers import SqlQueries
 
 default_args = {
-    "owner": 'Sparkify',
+    "owner": 'hieulm',
     "start_date": datetime(2024, 9, 28),
     "depends_on_past": False,
     "retries": 3,
