@@ -19,15 +19,17 @@ class DataQualityOperator(BaseOperator):
         # self.conn_id = conn_id
 
     def execute(self, context):
-        self.log.info('DataQualityOperator not implemented yet')
+        self.log.info('Executing DataQualityOperator: ...')
         redshift = PostgresHook(postgres_conn_id = self.redshift_conn_id)
         for test in self.condition_check:
             table = test.get("table")
             column = test.get("column")
+            result_check = test.get('result')
             sql_check = f'SELECT COUNT(*) FROM {table} WHERE {column} IS NULL'
 
-            records = redshift.get_records(table)[0]
-            if records[0] == 0:
+            records = redshift.get_records(sql_check)[0]
+            if records[0] == result_check:
                 self.log.info("Data quality check passed")
             else:
                 self.log.info("Data quality check failed")
+
